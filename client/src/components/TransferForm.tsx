@@ -24,94 +24,113 @@ export const TransferForm: React.FC = () => {
 
             updateBalance(response.data.balance);
             setStatus('success');
-            setMessage('Funds sent successfully!');
+            setMessage('Funds successfully transferred!');
             setEmail('');
             setAmount('');
 
             setTimeout(() => {
                 setStatus('idle');
                 setMessage('');
-            }, 3000);
+            }, 4000);
         } catch (error: any) {
             setStatus('error');
-            setMessage(error.response?.data?.message || 'Transfer failed');
+            setMessage(error.response?.data?.message || 'Transfer failed. Check your balance.');
         }
     };
 
     return (
-        <div className="glass p-8 rounded-xl">
-            <div className="flex items-center gap-3 mb-6">
-                <div className="p-2 rounded-lg bg-primary/10 border border-primary/20">
-                    <Send className="text-primary" size={20} />
+        <div className="glass p-10 rounded-3xl border-white/10 relative overflow-hidden group">
+            {/* Subtle light effect on hover */}
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+
+            <div className="flex items-center gap-4 mb-8">
+                <div className="p-3 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/20 shadow-lg">
+                    <Send className="text-primary" size={24} />
                 </div>
-                <h3 className="text-xl font-bold text-white">Send Money</h3>
+                <div>
+                    <h3 className="text-2xl font-bold text-white tracking-tight">Initiate Transfer</h3>
+                    <p className="text-xs text-muted mt-1 uppercase tracking-widest font-semibold opacity-60">Fast & Encrypted</p>
+                </div>
             </div>
 
-            <form onSubmit={handleTransfer} className="space-y-4">
-                <div className="input-group">
-                    <div className="input-icon">
-                        <Mail size={16} />
+            <form onSubmit={handleTransfer} className="space-y-6">
+                <div className="space-y-4">
+                    <div className="input-group">
+                        <div className="input-icon">
+                            <Mail size={18} />
+                        </div>
+                        <input
+                            type="email"
+                            placeholder="Recipient's Email Address"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                            className="input-field"
+                        />
                     </div>
-                    <input
-                        type="email"
-                        placeholder="Receiver's Email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                        className="input-field"
-                    />
-                </div>
 
-                <div className="input-group">
-                    <div className="input-icon">
-                        <DollarSign size={16} />
+                    <div className="input-group">
+                        <div className="input-icon">
+                            <DollarSign size={18} />
+                        </div>
+                        <input
+                            type="number"
+                            placeholder="Transfer Amount (USD)"
+                            value={amount}
+                            onChange={(e) => setAmount(e.target.value)}
+                            required
+                            min="0.01"
+                            step="0.01"
+                            className="input-field tabular-nums"
+                        />
                     </div>
-                    <input
-                        type="number"
-                        placeholder="Amount"
-                        value={amount}
-                        onChange={(e) => setAmount(e.target.value)}
-                        required
-                        min="0.01"
-                        step="0.01"
-                        className="input-field"
-                    />
                 </div>
 
                 <motion.button
-                    whileHover={{ scale: 1.01 }}
-                    whileTap={{ scale: 0.99 }}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                     disabled={status === 'loading'}
                     type="submit"
-                    className={`btn-primary w-full flex items-center justify-center gap-2 ${status === 'success' ? 'bg-green-500' :
-                            status === 'error' ? 'bg-red-500' : ''
+                    className={`btn-primary w-full flex items-center justify-center gap-3 h-14 ${status === 'success' ? 'from-green-500 to-green-600 shadow-green-500/20' :
+                            status === 'error' ? 'from-red-500 to-red-600 shadow-red-500/20' : ''
                         }`}
                 >
                     {status === 'loading' ? (
-                        <Loader2 className="animate-spin" size={20} />
+                        <div className="flex items-center gap-2">
+                            <Loader2 className="animate-spin" size={20} />
+                            <span className="font-bold">PROCESSING...</span>
+                        </div>
                     ) : status === 'success' ? (
-                        <CheckCircle2 size={20} />
+                        <div className="flex items-center gap-2">
+                            <CheckCircle2 size={22} />
+                            <span className="font-bold">FUNDS SENT</span>
+                        </div>
                     ) : status === 'error' ? (
-                        <AlertCircle size={20} />
+                        <div className="flex items-center gap-2">
+                            <AlertCircle size={22} />
+                            <span className="font-bold">FAILED</span>
+                        </div>
                     ) : (
                         <>
-                            <span>Transfer Now</span>
-                            <Send size={18} />
+                            <span className="font-bold">Confirm Transfer</span>
+                            <ArrowUpRight size={20} />
                         </>
                     )}
                 </motion.button>
 
                 <AnimatePresence>
                     {message && (
-                        <motion.p
+                        <motion.div
                             initial={{ opacity: 0, y: -10 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0 }}
-                            className={`text-center text-xs font-semibold mt-2 ${status === 'success' ? 'text-success' : 'text-error'
+                            className={`flex items-center justify-center gap-2 p-3 rounded-xl border ${status === 'success'
+                                    ? 'bg-green-500/10 border-green-500/20 text-success'
+                                    : 'bg-red-500/10 border-red-500/20 text-error'
                                 }`}
                         >
-                            {message}
-                        </motion.p>
+                            <span className="text-sm font-semibold">{message}</span>
+                        </motion.div>
                     )}
                 </AnimatePresence>
             </form>
