@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import { useSocket } from '../hooks/useSocket';
 import { TransferForm } from '../components/TransferForm';
 import { TransactionTable } from '../components/TransactionTable';
-import { LogOut, Wallet, ArrowUpRight, History } from 'lucide-react';
+import { LogOut, Wallet, History } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 
@@ -95,18 +95,18 @@ export const DashboardPage: React.FC = () => {
                 </div>
             </header>
 
-            <main className="max-w-4xl mx-auto px-6 py-16 space-y-16">
-                {/* Centered Transfer Form */}
+            <main className="max-w-4xl mx-auto px-6 py-20 space-y-24">
+                {/* Centered & Smaller Transfer Form */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 }}
-                    className="w-full"
+                    className="max-w-xl mx-auto w-full"
                 >
                     <TransferForm />
                 </motion.div>
 
-                {/* Simplified History */}
+                {/* Simplified History with more breathing room */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}

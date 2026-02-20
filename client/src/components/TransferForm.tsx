@@ -39,7 +39,7 @@ export const TransferForm: React.FC = () => {
     };
 
     return (
-        <div className="glass p-10 rounded-3xl border-white/10 relative overflow-hidden group">
+        <div className="glass p-8 rounded-3xl border-white/10 relative overflow-hidden group">
             {/* Subtle light effect on hover */}
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
