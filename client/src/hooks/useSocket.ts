@@ -8,7 +8,7 @@ export const useSocket = (onNewTransaction?: (transaction: any) => void) => {
 
     useEffect(() => {
         if (user && !socketRef.current) {
-            const socket = io('http://localhost:5000');
+            const socket = io(import.meta.env.VITE_API_URL || 'http://localhost:5000');
             socketRef.current = socket;
 
             socket.on('connect', () => {

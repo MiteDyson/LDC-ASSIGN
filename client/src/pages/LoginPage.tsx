@@ -27,10 +27,10 @@ export const LoginPage: React.FC = () => {
         setIsSubmitting(true);
         try {
             if (isRegister) {
-                const response = await axios.post('http://localhost:5000/api/auth/register', { email, password, name });
+                const response = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/auth/register`, { email, password, name });
                 login(response.data.token, response.data.user);
             } else {
-                const response = await axios.post('http://localhost:5000/api/auth/login', { email, password });
+                const response = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/auth/login`, { email, password });
                 login(response.data.token, response.data.user);
             }
         } catch (err: any) {

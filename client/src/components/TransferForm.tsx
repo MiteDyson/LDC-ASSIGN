@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Send, Mail, DollarSign, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
+import { Send, Mail, DollarSign, Loader2, CheckCircle2, AlertCircle, ArrowUpRight } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -17,7 +17,7 @@ export const TransferForm: React.FC = () => {
         setMessage('');
 
         try {
-            const response = await axios.post('http://localhost:5000/api/transfer', {
+            const response = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/transfer`, {
                 receiverEmail: email,
                 amount: parseFloat(amount)
             });
@@ -92,7 +92,7 @@ export const TransferForm: React.FC = () => {
                     disabled={status === 'loading'}
                     type="submit"
                     className={`btn-primary w-full flex items-center justify-center gap-3 h-14 ${status === 'success' ? 'from-green-500 to-green-600 shadow-green-500/20' :
-                            status === 'error' ? 'from-red-500 to-red-600 shadow-red-500/20' : ''
+                        status === 'error' ? 'from-red-500 to-red-600 shadow-red-500/20' : ''
                         }`}
                 >
                     {status === 'loading' ? (
@@ -125,8 +125,8 @@ export const TransferForm: React.FC = () => {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0 }}
                             className={`flex items-center justify-center gap-2 p-3 rounded-xl border ${status === 'success'
-                                    ? 'bg-green-500/10 border-green-500/20 text-success'
-                                    : 'bg-red-500/10 border-red-500/20 text-error'
+                                ? 'bg-green-500/10 border-green-500/20 text-success'
+                                : 'bg-red-500/10 border-red-500/20 text-error'
                                 }`}
                         >
                             <span className="text-sm font-semibold">{message}</span>

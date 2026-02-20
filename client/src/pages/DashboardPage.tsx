@@ -21,7 +21,7 @@ export const DashboardPage: React.FC = () => {
     useEffect(() => {
         const fetchHistory = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/api/history');
+                const response = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/history`);
                 setTransactions(response.data);
             } catch (error) {
                 console.error('Error fetching history:', error);
