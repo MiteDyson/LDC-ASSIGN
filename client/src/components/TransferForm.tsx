@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Mail, DollarSign, Loader2, CheckCircle2, AlertCircle, ArrowUpRight } from 'lucide-react';
+import { Mail, Loader2, CheckCircle2, AlertCircle, ArrowUpRight } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -198,21 +198,21 @@ export const TransferForm: React.FC = () => {
                 {/* Amount Input */}
                 <div className="tf-input-group" style={{ marginBottom: 0 }}>
                     <div className="tf-icon">
-                        <DollarSign size={18} />
+                        <span className="text-sm font-bold">₹</span>
                     </div>
                     <input
                         type="number"
-                        placeholder="0.00"
+                        placeholder="0"
                         value={amount}
                         onChange={(e) => setAmount(e.target.value)}
                         required
-                        min="0.01"
-                        step="0.01"
+                        min="1"
+                        step="1"
                         className="tf-input"
                         style={{ fontFamily: 'monospace', paddingRight: '4.5rem' }}
                     />
                     <div className="tf-currency-badge">
-                        USD
+                        INR
                     </div>
                 </div>
 
@@ -223,8 +223,8 @@ export const TransferForm: React.FC = () => {
                     disabled={status === 'loading'}
                     type="submit"
                     className={`tf-submit-btn ${status === 'success' ? 'tf-btn-success' :
-                            status === 'error' ? 'tf-btn-error' :
-                                'tf-btn-idle'
+                        status === 'error' ? 'tf-btn-error' :
+                            'tf-btn-idle'
                         }`}
                 >
                     {status === 'loading' ? (

@@ -77,7 +77,6 @@ export const TransactionTable: React.FC<Props> = ({ transactions, currentUserId,
                         <Clock size={48} className="opacity-20" />
                     </div>
                     <p className="text-lg font-bold text-white tracking-tight">No Transactions Found</p>
-                    <p className="text-sm mt-1 opacity-60">Your vault logs are currently empty.</p>
                 </div>
             ) : (
                 <div className="table-container">
@@ -146,14 +145,14 @@ export const TransactionTable: React.FC<Props> = ({ transactions, currentUserId,
                                             <td className={`text-right font-black text-lg tabular-nums ${isOutgoing ? 'text-red-400' : 'text-green-400'}`}>
                                                 <div className="flex items-center justify-end gap-1">
                                                     <span className="text-xs opacity-50 font-bold">{isOutgoing ? '-' : '+'}</span>
-                                                    <span>${tx.amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                                                    <span>₹{tx.amount.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })}</span>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div className="flex justify-center">
                                                     <span className={`status-pill ${tx.status === 'SUCCESS'
-                                                            ? 'bg-green-500/10 text-green-400 border-green-500/20'
-                                                            : 'bg-red-500/10 text-red-400 border-red-500/20'
+                                                        ? 'bg-green-500/10 text-green-400 border-green-500/20'
+                                                        : 'bg-red-500/10 text-red-400 border-red-500/20'
                                                         }`}>
                                                         {tx.status}
                                                     </span>

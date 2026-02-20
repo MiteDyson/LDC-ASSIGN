@@ -71,7 +71,7 @@ export const DashboardPage: React.FC = () => {
                     >
                         <p className="text-[11px] font-bold text-zinc-500 uppercase tracking-[0.25em] mb-1">Available Balance</p>
                         <div className="flex items-center justify-center gap-1.5">
-                            <span className="text-indigo-400/70 font-mono text-xl">$</span>
+                            <span className="text-indigo-400/70 font-mono text-xl">₹</span>
                             <div className="text-4xl font-mono font-black text-white tracking-tighter flex items-center">
                                 <AnimatePresence mode="wait">
                                     <motion.span
@@ -81,7 +81,7 @@ export const DashboardPage: React.FC = () => {
                                         exit={{ opacity: 0, y: -10 }}
                                         className="inline-block"
                                     >
-                                        {user.balance.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+                                        {user.balance.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                                     </motion.span>
                                 </AnimatePresence>
                             </div>
@@ -96,7 +96,7 @@ export const DashboardPage: React.FC = () => {
                     >
                         {/* ONLY User Name */}
                         <div className="hidden lg:flex items-center pr-5 border-r border-white/10">
-                            <span className="text-sm font-bold text-zinc-400">Node: <span className="text-zinc-100">{user.name}</span></span>
+                            <span className="text-sm font-bold text-zinc-400"> <span className="text-zinc-100">{user.name}</span></span>
                         </div>
                         <button
                             onClick={logout}
@@ -156,7 +156,6 @@ export const DashboardPage: React.FC = () => {
                             <History className="text-indigo-400" size={20} />
                             <h3 className="text-xl font-bold text-white tracking-tight">Vault Ledger</h3>
                         </div>
-                        <p className="text-sm text-zinc-500">Your verified transaction history</p>
                     </motion.div>
 
                     {/* Table Container */}
