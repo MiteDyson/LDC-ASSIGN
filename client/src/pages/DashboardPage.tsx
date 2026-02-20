@@ -36,7 +36,7 @@ export const DashboardPage: React.FC = () => {
         <div className="min-h-screen">
             {/* Header */}
             <header className="glass sticky top-0 z-50 border-b">
-                <div className="max-w-7xl px-6 h-20 flex items-center justify-between">
+                <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
@@ -68,7 +68,7 @@ export const DashboardPage: React.FC = () => {
                 </div>
             </header>
 
-            <main className="max-w-7xl px-6 py-10">
+            <main className="max-w-7xl mx-auto px-6 py-10">
                 <div className="grid grid-cols-12 gap-8">
                     {/* Left Column: Balance & Transfer */}
                     <div className="col-span-4 space-y-8">
